@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Presentation Voting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .instructions {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .voting-section {
+            margin-bottom: 30px;
+        }
+
+        .position-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .points-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        select:hover {
+            border-color: #667eea;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .reset-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .reset-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error-message {
+            display: none;
+            background: #f44336;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .results-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .results-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .results-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎤 Class Presentation Voting</h1>
+        <p class="subtitle">Vote for your top 3 favorite presentations</p>
+
+        <div class="instructions">
+            <strong>How to vote:</strong> Select your favorite group for 1st place (3 points), 2nd place (2 points), and 3rd place (1 point). Each group can only be selected once.
+        </div>
+
+        <form id="votingForm">
+            <!-- 1st Place -->
+            <div class="voting-section">
+                <div class="position-label">
+                    🥇 1st Place Favorite
+                    <span class="points-badge">3 points</span>
+                </div>
+                <select id="first" name="first" required>
+                    <option value="">-- Select 1st Place --</option>
+                    <option value="Group 1">Group 1</option>
+                    <option value="Group 2">Group 2</option>
+                    <option value="Group 3">Group 3</option>
+                    <option value="Group 4">Group 4</option>
+                    <option value="Group 5">Group 5</option>
+                </select>
+            </div>
+
+            <!-- 2nd Place -->
+            <div class="voting-section">
+                <div class="position-label">
+                    🥈 2nd Place Favorite
+                    <span class="points-badge">2 points</span>
+                </div>
+                <select id="second" name="second" required>
+                    <option value="">-- Select 2nd Place --</option>
+                    <option value="Group 1">Group 1</option>
+                    <option value="Group 2">Group 2</option>
+                    <option value="Group 3">Group 3</option>
+                    <option value="Group 4">Group 4</option>
+                    <option value="Group 5">Group 5</option>
+                </select>
+            </div>
+
+            <!-- 3rd Place -->
+            <div class="voting-section">
+                <div class="position-label">
+                    🥉 3rd Place Favorite
+                    <span class="points-badge">1 point</span>
+                </div>
+                <select id="third" name="third" required>
+                    <option value="">-- Select 3rd Place --</option>
+                    <option value="Group 1">Group 1</option>
+                    <option value="Group 2">Group 2</option>
+                    <option value="Group 3">Group 3</option>
+                    <option value="Group 4">Group 4</option>
+                    <option value="Group 5">Group 5</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="submit-btn">📊 Submit Vote</button>
+                <button type="reset" class="reset-btn">Clear</button>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✓ Your vote has been recorded! Thank you for voting.
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                ⚠ Please select three different groups!
+            </div>
+        </form>
+
+        <div class="results-link">
+            <a href="results.html" target="_blank">📈 View Live Results</a>
+        </div>
+    </div>
+
+    <script>
+        // Store votes in localStorage
+        const form = document.getElementById('votingForm');
+        const successMsg = document.getElementById('successMessage');
+        const errorMsg = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const first = document.getElementById('first').value;
+            const second = document.getElementById('second').value;
+            const third = document.getElementById('third').value;
+
+            // Validate that all three are different
+            if (first === second || second === third || first === third) {
+                errorMsg.style.display = 'block';
+                successMsg.style.display = 'none';
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 4000);
+                return;
+            }
+
+            // Create vote object
+            const vote = {
+                first: first,
+                second: second,
+                third: third,
+                timestamp: new Date().toISOString()
+            };
+
+            // Get existing votes from localStorage
+            let votes = JSON.parse(localStorage.getItem('classVotes')) || [];
+            votes.push(vote);
+
+            // Save to localStorage
+            localStorage.setItem('classVotes', JSON.stringify(votes));
+
+            // Show success message
+            successMsg.style.display = 'block';
+            errorMsg.style.display = 'none';
+
+            // Reset form
+            form.reset();
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
